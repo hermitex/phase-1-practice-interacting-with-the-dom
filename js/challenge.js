@@ -22,31 +22,37 @@ const startCounter = (isCounting = true) => {
   }
 };
 
-const minusCounter = () => {
-  count = count - 1;
-};
 
-const addCounter = () => {
-  count = count + 1;
-};
 
-const pauseResumeCounter = (e) => {
-  if (e.target.textContent.trim() === "pause") {
-    pauseCounter(e);
+const pauseResumeCounter = () => {
+  if (pause.textContent.trim() === "pause") {
+    pauseCounter();
   } else {
-    restartCounter(e);
+    restartCounter();
   }
 };
 
-const pauseCounter = (e) => {
+const pauseCounter = () => {
   clearInterval(intervalId);
-  e.target.textContent = "resume";
+  pause.textContent = "resume";
 
   controls.forEach((control) => control.setAttribute("disabled", true));
 };
 
-const restartCounter = (e) => {
-  e.target.textContent = "pause";
+const minusCounter = () => {
+    pauseCounter();
+    count = count - 1;
+    restartCounter();
+  };
+  
+  const addCounter = () => {
+    pauseCounter();
+    count = count + 1;
+    restartCounter();
+  };
+
+const restartCounter = () => {
+  pause.textContent = "pause";
   controls.forEach((control) => (control.disabled = false));
   intervalId = setInterval(() => {
     count++;
