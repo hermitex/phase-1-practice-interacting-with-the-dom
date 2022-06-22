@@ -22,8 +22,6 @@ const startCounter = (isCounting = true) => {
   }
 };
 
-
-
 const pauseResumeCounter = () => {
   if (pause.textContent.trim() === "pause") {
     pauseCounter();
@@ -35,21 +33,22 @@ const pauseResumeCounter = () => {
 const pauseCounter = () => {
   clearInterval(intervalId);
   pause.textContent = "resume";
-
   controls.forEach((control) => control.setAttribute("disabled", true));
 };
 
 const minusCounter = () => {
-    pauseCounter();
-    count = count - 1;
-    restartCounter();
-  };
-  
-  const addCounter = () => {
-    pauseCounter();
-    count = count + 1;
-    restartCounter();
-  };
+  pauseCounter();
+  count = count - 1;
+  counter.textContent = count;
+  restartCounter();
+};
+
+const addCounter = () => {
+  pauseCounter();
+  count = count + 1;
+  counter.textContent = count;
+  restartCounter();
+};
 
 const restartCounter = () => {
   pause.textContent = "pause";
@@ -72,7 +71,9 @@ const addCounterComment = (formData) => {
   }
   formData.target.reset();
 };
+
 let likes = {};
+let prevCount = 0;
 const addALike = () => {
   let like;
   if (count in likes) {
