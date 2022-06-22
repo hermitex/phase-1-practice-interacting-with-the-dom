@@ -73,7 +73,6 @@ const addCounterComment = (formData) => {
 };
 
 let likes = {};
-let prevCount = 0;
 const addALike = () => {
   let like;
   if (count in likes) {
